@@ -19,7 +19,7 @@ gadgets:
           <!-- user input -->
           <img src="https://addtoany@[current-host]/assets/xss/index.js?" name="currentScript">
 
-          <script async src="/assets/libs/addtoany/20240821/page.js"></script>
+          <script nonce="secret" async src="/assets/libs/addtoany/20240821/page.js"></script>
     more-info: |
       **Root Cause**
 
