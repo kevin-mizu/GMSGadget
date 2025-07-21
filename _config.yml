@@ -1,0 +1,19 @@
+---
+title: GMSGadget
+
+exclude: [ '/Gemfile', '/README.md', '/CONTRIBUTING.md']
+
+permalink: pretty
+
+url: https://gmsgadget.com
+baseurl: /
+
+collections:
+  gadgets:
+    output: true
+
+defaults:
+  - scope:
+      path: '_gadgets'
+    values:
+      layout: gadget

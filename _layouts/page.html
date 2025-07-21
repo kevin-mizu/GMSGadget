@@ -1,0 +1,13 @@
+---
+layout: common
+---
+
+{% include page_title.html title=page.title %}
+
+<script>
+    document.addEventListener("keydown", e => {
+      if (location.pathname !== "/" && e.key === "Escape") history.back();
+    });
+</script>
+
+{{ content }}

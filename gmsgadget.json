@@ -1,0 +1,13 @@
+---
+---
+{
+    {% for file in site.gadgets %}
+        {% capture gtfobin %}{% include get_gadgets_name path=file.path %}{% endcapture %}
+        {{ gtfobin | jsonify }}: {
+            "description": {{ file.description | jsonify }},
+            "github": {{ file.github | jsonify }},
+            "gadgets": {{ file.gadgets | jsonify }}
+        }
+        {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+}

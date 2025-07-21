@@ -1,0 +1,179 @@
+---
+# this is the rendering order of tags
+
+## Tags
+any-tag:
+  label: any
+  type: tag
+
+a-tag:
+  label: a
+  type: tag
+
+comment-tag:
+  label: comment
+  type: tag
+
+form-tag:
+  label: form
+  type: tag
+
+iframe-tag:
+  label: iframe
+  type: tag
+
+img-tag:
+  label: img
+  type: tag
+
+ul-tag:
+  label: ul
+  type: tag
+
+li-tag:
+  label: li
+  type: tag
+
+link-tag:
+  label: link
+  type: tag
+
+optgroup-tag:
+  label: optgroup
+  type: tag
+
+select-tag:
+  label: select
+  type: tag
+
+script-tag:
+  label: script
+  type: tag
+
+noscript-tag:
+  label: noscript
+  type: tag
+
+text-tags:
+  label: text-tags
+  type: tag
+  description: |
+    All tags which has a raw text content: style, script, noembed, noframes, noscript, plaintext, xmp.
+
+doc-tags:
+  label: doc-tags
+  type: tag
+  description: |
+    All tags that can be used to clobber the document: form, img, image, iframe, embed and object.
+
+## Attributes
+any-attr:
+  label: any
+  type: attribute
+
+custom-attr:
+  label: custom
+  type: attribute
+
+class-attr:
+  label: class
+  type: attribute
+
+data-attr:
+  label: data-*
+  type: attribute
+
+href-attr:
+  label: href
+  type: attribute
+
+id-attr:
+  label: id
+  type: attribute
+
+label-attr:
+  label: label
+  type: attribute
+
+name-attr:
+  label: name
+  type: attribute
+
+rel-attr:
+  label: rel
+  type: attribute
+
+src-attr:
+  label: src
+  type: attribute
+
+srcdoc-attr:
+  label: srcdoc
+  type: attribute
+
+title-attr:
+  label: title
+  type: attribute
+
+type-attr:
+  label: type
+  type: attribute
+
+value-attr:
+  label: value
+  type: attribute
+
+## CSP
+wh-host-csp:
+  label: wh-host
+  type: csp
+  description: Being able to load the gadget is enough to bypass the CSP.
+
+nonce-csp:
+  label: nonce
+  type: csp
+  description: The gadget dynamically adds scripts to the page with a nonce.
+
+strict-dynamic-csp:
+  label: strict-dynamic
+  type: csp
+  description: The gadget dynamically adds scripts to the page.
+
+unsafe-eval-csp:
+  label: unsafe-eval
+  type: csp
+  description: The gadget uses JavaScript code evaluation methods such as eval(), new Function(), and setTimeout(string).
+
+## Timing
+any-timing:
+  label: any
+  type: timing
+  description: The HTML injections can occure at any time.
+
+before-func-call:
+  label: before-call
+  type: timing
+  description: The HTML injections has to occure before a function call.
+
+before-lib-load:
+  label: before-load
+  type: timing
+  description: The HTML injections has to occure before the library is loaded.
+
+func-call-parameter:
+  label: func-parameter
+  type: timing
+  description: The HTML is a parameter of a function call.
+
+## Browser
+chrome-browser:
+  label: chrome
+  type: browser
+
+firefox-browser:
+  label: firefox
+  type: browser
+
+safari-browser:
+  label: safari
+  type: browser

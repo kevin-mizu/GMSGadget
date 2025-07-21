@@ -1,0 +1,22 @@
+---
+description: TODO
+github: author/repo
+gadgets:
+  Latest:
+    cve: CVE-XXXX-XXXXX
+    authors:
+      - twitter:author
+      - github:author
+      - email:author
+      - author
+    tags:
+      - TODO
+    pocs:
+      - description: TODO
+        code: |
+          TODO
+    more-info: |
+      TODO
+    links:
+      - TODO
+---

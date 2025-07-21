@@ -1,0 +1,513 @@
+---
+---
+
+$foreground: #000000;
+$background: #ffffff;
+$accent: #bf0707;
+$lighter: #fff4f4;
+$marked: #ffcccc;
+$hover: #ff0000;
+$code-font-size: 13px;
+$small-font-size: 14px;
+
+// layout
+
+$column-width: 1000px;
+$grace-space: 200px;
+$layout-break: "(min-width: #{$column-width + $grace-space})";
+
+@media #{$layout-break} {
+    body {
+        width: $column-width;
+        margin: 40px auto;
+    }
+
+    p {
+        text-align: justify;
+    }
+}
+
+@media not all and #{$layout-break} {
+    .github-corner {
+        display: none;
+    }
+}
+
+// common tags
+
+body {
+    font-family: sans, sans-serif;
+    word-wrap: break-word;
+}
+
+code {
+    padding: 0.15em 0.25em;
+    border-radius: 0.25em;
+    color: $accent;
+    background: $lighter;
+}
+
+.code-container code {
+    padding: 0.15em 0.25em;
+    border-radius: 0.25em;
+    color: $accent;
+    background: $lighter;
+}
+
+.code-container pre {
+    background: $lighter;
+    padding: 1em;
+    overflow-x: auto;
+
+    code {
+        padding: 0;
+        border-radius: 0;
+    }
+}
+
+pre {
+    background: $lighter;
+    padding: 1em;
+    overflow-x: auto;
+
+    code {
+        padding: 0;
+        border-radius: 0;
+    }
+}
+
+.no-style-link,
+.no-style-link:visited,
+.no-style-link:hover,
+.no-style-link:active,
+.no-style-link:focus {
+    color: inherit !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+details summary {
+	cursor: pointer;
+	list-style: none;
+}
+
+details[open] summary::before {
+	content: "↓ ";
+	padding-right: 0.3em;
+}
+
+details summary::before {
+	content: "→ ";
+	padding-right: 0.3em;
+}
+
+a {
+    &:link, &:visited {
+        color: $accent;
+    }
+
+    &:hover {
+        color: $hover;
+
+        & > *:not(svg) { // XXX not for the GitHub corner
+            color: $hover;
+        }
+    }
+}
+
+// list and search
+
+.search-toolbox {
+    position: relative; // XXX needed for tooltip sizing
+    margin-bottom: 20px;
+
+    fieldset {
+        border: 1px solid $accent;
+        margin: 0;
+        padding: 1rem;
+        padding-top: 0;
+
+        legend {
+            color: $foreground;
+            font-size: initial;
+            font-weight: bold;
+            padding: 0.5em;
+        }
+    }
+
+    .search-filters {
+        justify-content: center;
+
+        a {
+            background: $lighter;
+            font-size: initial;
+            border-radius: 0.25em;
+
+            &[data-title]:hover:before {
+                content: attr(data-title);
+                font-size: $small-font-size;
+                text-align: center;
+                display: block;
+                position: absolute;
+                left: 10%;
+                right: 10%;
+                margin-top: 1.75rem; // XXX below the button
+                padding: 1em;
+                color: $background;
+                background: $foreground;
+                border-radius: 0.25em;
+                pointer-events: none;
+            }
+        }
+    }
+
+    input {
+        // enlarge the click area
+        margin: -1rem;
+        padding: 1rem;
+        background: transparent;
+
+        // adjust the width due to negative padding
+        width: calc(100% + 2rem);
+
+        font-size: 1rem;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+    }
+}
+
+// function and contexts buttons used in both the table and single pages
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: $small-font-size;
+    list-style: none;
+    column-gap: 0.25em;
+    row-gap: 0.25em;
+    padding: 0;
+    margin: 0;
+
+    a {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        border: 1px solid $accent;
+    }
+
+    a:link, a:visited {
+        color: $accent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: $hover;
+        border-color: $hover;
+    }
+
+    &.inherit a {
+        border-style: dashed;
+    }
+}
+
+.tag-list-table {
+    a {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        border: 1px solid $accent;
+    }
+
+    a:link, a:visited {
+        color: $accent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: $hover;
+        border-color: $hover;
+    }
+
+    &.inherit a {
+        border-style: dashed;
+    }
+}
+
+// Tags in gadget page
+
+.tag {
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    margin: 0.2em 0.2em 0.2em 0;
+    border: 1px solid $accent;
+    color: $accent;
+    text-decoration: none;
+    cursor: default;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.tag:hover {
+    background-color: $hover;
+    color: $background;
+}
+
+// Active state for all tag types
+.tag.active {
+    color: $accent;
+    border-color: $accent;
+}
+
+// Type-specific background colors for active state
+.element-tag.active { background-color: darken(#f0f0ff, 15%) !important; }
+.attribute-tag.active { background-color: darken(#fff0f0, 15%) !important; }
+.timing-tag.active { background-color: darken(#f0fff0, 15%) !important; }
+.csp-bypass-tag.active { background-color: darken(#fff5e0, 15%) !important; }
+.browser-tag.active { border-color: transparent !important; background-color: transparent !important; }
+
+// Special tag styling
+
+.attribute-tag {
+    background-color: #fff0f0 !important;
+}
+
+.element-tag {
+    background-color: #f0f0ff  !important;
+}
+
+.timing-tag {
+    background-color: #f0fff0 !important;
+}
+
+.csp-bypass-tag {
+    background-color: #fff5e0 !important;
+}
+
+.browser-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0em 0em !important;
+    margin: 0.1em !important;
+    cursor: pointer !important;
+    vertical-align: middle !important;
+    transition: all 0.2s ease;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+}
+
+.browser-tag:hover {
+    background-color: transparent !important;
+}
+
+// permalink on headings
+
+h2, h3, h4, h5, h5 {
+    .permalink {
+        margin-left: 5px;
+        text-decoration: none;
+        visibility: hidden;
+
+        &::before {
+            content: "#";
+        }
+    }
+
+    &:target {
+        border-left: 5px solid $accent;
+        padding-left: 5px;
+    }
+
+    &:hover {
+        .permalink {
+            visibility: visible;
+        }
+    }
+}
+
+// binary list and search
+
+#gadget-search-wrapper {
+    margin: 50px 0;
+    padding: 10px 0;
+    position: relative; // XXX needed for tooltip sizing
+
+    #gadget-search-filters {
+        text-align: center;
+
+        a {
+            background: $lighter;
+            font-size: initial;
+            border-radius: 0.25em;
+
+            &:hover:before {
+                content: attr(data-title);
+                font-size: 0.8rem;
+                display: block;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin-top: 1.75rem; // XXX below the button
+                margin-left: 10%;
+                margin-right: 10%;
+                padding: 1em;
+                border-radius: 1em;
+                color: $lighter;
+                background: rgba(0, 0, 0, 0.75);
+                z-index: 1;
+                pointer-events: none;
+            }
+        }
+    }
+
+    #gadget-search {
+        margin-top: 25px;
+        padding: 1em;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid $accent;
+        outline-color: $accent;
+    }
+}
+
+#gadget-table {
+    width: 100%;
+
+    th, td {
+        padding: 0.2em 1em;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    tbody tr:hover {
+        background: $lighter;
+    }
+
+    #search-message {
+        display: none;
+        text-align: center;
+        padding: 1em;
+    }
+}
+
+// Make sure the browser column allows to have the 3 icons in one row on full screen.
+#gadget-table th:nth-child(2) {
+    width: 100px;
+}
+
+.browser-tag.active {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+// function description
+
+.function-list {
+    font-size: 0.8rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: inline-block;
+
+        a {
+            display: inline-block;
+            padding: 0.25em 0.5em;
+            margin: 0.2em 0;
+            border: 1px solid $accent;
+        }
+
+        a:link, a:visited {
+            color: $accent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: $hover;
+            border-color: $hover;
+        }
+
+        &.match a {
+            background: $marked;
+        }
+    }
+}
+
+// script gadgets
+
+.gadgets {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+
+    & > li {
+        display: table-row;
+
+        &:not(:only-child):before {
+            display: table-cell;
+            font-size: 0.8rem;
+            font-weight: bold;
+            width: 3em;
+            text-align: center;
+            counter-increment: item;
+            content: "(" counter(item, lower-alpha) ")";
+        }
+    }
+}
+
+// other classes
+
+.logo {
+    $margin: 20px;
+    float: right;
+    width: 100px;
+    height: 100px;
+    margin-left: $margin;
+    margin-bottom: $margin;
+}
+
+.gadget-name {
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+
+.version-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.github-buttons {
+    display: inline-block;
+    margin-left: 10px;
+
+    // avoid displaying the link text during loading
+    a.github-button {
+        visibility: hidden;
+    }
+}
+
+.small {
+    font-size: $small-font-size;
+}
+
+.centered {
+    text-align: center;
+}
+
+.github-buttons {
+    display: inline-block;
+    float: right;
+
+    // avoid displaying the link text during loading
+    a.github-button {
+        visibility: hidden;
+    }
+}

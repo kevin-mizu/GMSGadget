@@ -1,0 +1,1 @@
+"use strict";const t=""+(typeof document>"u"?require("url").pathToFileURL(__dirname+"/extra-BLVEx9Lb.js").href:new URL("extra-BLVEx9Lb.js",document.currentScript&&document.currentScript.src||document.baseURI).href);var e=document.createElement("script");e.src=t;document.head.append(e);

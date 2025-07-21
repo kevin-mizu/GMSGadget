@@ -1,0 +1,439 @@
+<div class="search-toolbox">
+    <fieldset>
+        <legend>🌐 Browsers</legend>
+        <ul class="search-filters tag-list">
+            {% for tag_pair in site.data.tags %}
+            {% if tag_pair[1].type != 'browser' %}{% continue %}{% endif %}
+            {% assign tag_id = tag_pair[0] %}
+            {% assign tag = tag_pair[1] %}
+            <li><a href="javascript:void(0)" onclick="toggleTagFilter('browser', '{{ tag.label | downcase }}')" class="browser-tag" {% if tag.description %}data-title="{{ tag.description | replace: '\n', ' ' }}"{% endif %}><img width="24" height="24" src="/assets/{{ tag.label }}.svg"></a></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend><> Tags</legend>
+        <ul class="search-filters tag-list">
+            {% for tag_pair in site.data.tags %}
+            {% if tag_pair[1].type != 'tag' %}{% continue %}{% endif %}
+            {% assign tag_id = tag_pair[0] %}
+            {% assign tag = tag_pair[1] %}
+            <li><a href="javascript:void(0)" onclick="toggleTagFilter('tags', '{{ tag.label | downcase }}')" class="tag element-tag" {% if tag.description %}data-title="{{ tag.description | replace: '\n', ' ' }}"{% endif %}>{{ tag.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend>@ Attributes</legend>
+        <ul class="search-filters tag-list">
+            {% for tag_pair in site.data.tags %}
+            {% if tag_pair[1].type != 'attribute' %}{% continue %}{% endif %}
+            {% assign tag_id = tag_pair[0] %}
+            {% assign tag = tag_pair[1] %}
+            <li><a href="javascript:void(0)" onclick="toggleTagFilter('attribute', '{{ tag.label | downcase }}')" class="tag attribute-tag" {% if tag.description %}data-title="{{ tag.description | replace: '\n', ' ' }}"{% endif %}>{{ tag.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend>🛡️ CSP</legend>
+        <ul class="search-filters tag-list">
+            {% for tag_pair in site.data.tags %}
+            {% if tag_pair[1].type != 'csp' %}{% continue %}{% endif %}
+            {% assign tag_id = tag_pair[0] %}
+            {% assign tag = tag_pair[1] %}
+            <li><a href="javascript:void(0)" onclick="toggleTagFilter('csp', '{{ tag.label | downcase }}')" class="tag csp-bypass-tag" {% if tag.description %}data-title="{{ tag.description | replace: '\n', ' ' }}"{% endif %}>{{ tag.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend>⏱️ Timing</legend>
+        <ul class="search-filters tag-list">
+            {% for tag_pair in site.data.tags %}
+            {% if tag_pair[1].type != 'timing' %}{% continue %}{% endif %}
+            {% assign tag_id = tag_pair[0] %}
+            {% assign tag = tag_pair[1] %}
+            <li><a href="javascript:void(0)" onclick="toggleTagFilter('timing', '{{ tag.label | downcase }}')" class="tag timing-tag" {% if tag.description %}data-title="{{ tag.description | replace: '\n', ' ' }}"{% endif %}>{{ tag.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+    <fieldset>
+        <legend>🔍 Filter</legend>
+        <input id="gadgets-search" type="text" placeholder="Search: [name] [tags:] [timing:] [csp:] [attribute:]"/>
+    </fieldset>
+</div>
+
+<div id="gadget-table-wrapper">
+    <div id="result-counter" style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <div>Showing <span id="visible-count">{{ site.gadgets | size }}</span> of {{ site.gadgets | size }} gadgets.</div>
+        <div><a href="/gmsgadget.json" download="gmsgadget.json">Dump All</a></div>
+    </div>
+    <table id="gadget-table">
+        <thead>
+            <tr>
+                <th>Library</th>
+                <th>Browsers</th>
+                <th>Tags</th>
+                <th>Attributes</th>
+                <th>CSP</th>
+                <th>Timing</th>
+            </tr>
+        </thead>
+        <tbody class="search-toolbox">
+            {% for file in site.gadgets %}
+            <tr>
+                <td><a href="{{ file.url }}" class="gadget-name">{% include get_gadgets_name path=file.path %}</a></td>
+                {% assign tags = "" %}
+                {% for gadget in file.gadgets %}
+                    {% if gadget[1].tags %}{% assign tags = tags | concat: gadget[1].tags | uniq %}{% endif %}
+                {% endfor %}
+
+                <td class="search-filters tag-list-table">
+                    {% for tag in tags %}
+                        {% assign tag_data = site.data.tags[tag] %}
+                        {% unless tag_data.type == 'browser' %}{% continue %}{% endunless %}
+                        <a href="javascript:void(0)" onclick="toggleTagFilter('browser', '{{ tag_data.label | downcase }}')" class="browser-tag"><img width="24" height="24" src="/assets/{{ tag_data.label }}.svg"></a>
+                    {% endfor %}
+                </td>
+                <td class="search-filters tag-list-table">
+                    {% for tag in tags %}
+                        {% assign tag_data = site.data.tags[tag] %}
+                        {% unless tag_data.type == 'tag' %}{% continue %}{% endunless %}
+                        <a href="javascript:void(0)" onclick="toggleTagFilter('tags', '{{ tag_data.label | downcase }}')" class="tag element-tag">{{ tag_data.label }}</a>
+                    {% endfor %}
+                </td>
+                <td class="search-filters tag-list-table">
+                    {% for tag in tags %}
+                        {% assign tag_data = site.data.tags[tag] %}
+                        {% unless tag_data.type == 'attribute' %}{% continue %}{% endunless %}
+                        <a href="javascript:void(0)" onclick="toggleTagFilter('attribute', '{{ tag_data.label | downcase }}')" class="tag attribute-tag">{{ tag_data.label }}</a>
+                    {% endfor %}
+                </td>
+                <td class="search-filters tag-list-table">
+                    {% for tag in tags %}
+                        {% assign tag_data = site.data.tags[tag] %}
+                        {% unless tag_data.type == 'csp' %}{% continue %}{% endunless %}
+                        <a href="javascript:void(0)" onclick="toggleTagFilter('csp', '{{ tag_data.label | downcase }}')" class="tag csp-bypass-tag">{{ tag_data.label }}</a>
+                    {% endfor %}
+                </td>
+                <td class="search-filters tag-list-table">
+                    {% for tag in tags %}
+                        {% assign tag_data = site.data.tags[tag] %}
+                        {% unless tag_data.type == 'timing' %}{% continue %}{% endunless %}
+                        <a href="javascript:void(0)" onclick="toggleTagFilter('timing', '{{ tag_data.label | downcase }}')" class="tag timing-tag">{{ tag_data.label }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr><td id="search-message" colspan="2">No binary matches...</td></tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+ function filter(query) {
+     var terms = query.toLowerCase().trim().split(' ');
+     var tagFilters = {
+         browser: [],
+         tags: [],
+         attribute: [],
+         csp: [],
+         timing: []
+     };
+     var normalTerms = [];
+     
+     // Parse query terms
+     terms.forEach(function(term) {
+         if (term.startsWith('browser:')) {
+             tagFilters.browser = term.substring(8).split(',');
+         } else if (term.startsWith('tags:')) {
+             tagFilters.tags = term.substring(5).split(',');
+         } else if (term.startsWith('attribute:')) {
+             tagFilters.attribute = term.substring(10).split(',');
+         } else if (term.startsWith('csp:')) {
+             tagFilters.csp = term.substring(4).split(',');
+         } else if (term.startsWith('timing:')) {
+             tagFilters.timing = term.substring(7).split(',');
+         } else {
+             normalTerms.push(term);
+         }
+     });
+     
+     // Parse normal terms like before
+     var normalQuery = normalTerms.join(' ');
+     var queryArray = normalQuery.split(/ *\+/);
+     var binPattern = queryArray[0];
+     var functionPatterns = queryArray.splice(1);
+
+     // Filter rows
+     var noResults = true;
+     document.querySelectorAll('#gadget-table tbody tr').forEach(function (row) {
+         var show = true;
+
+         // Binary name filter
+         var binName = row.children[0].firstElementChild.innerText.toLowerCase();
+         if (binPattern && binName.indexOf(binPattern) === -1) {
+             show = false;
+         }
+
+          // Tag filters
+         if (show) {
+             // Check browser tags
+             if (tagFilters.browser && tagFilters.browser.length > 0) {
+                 var browserImgs = Array.from(row.children[1].querySelectorAll('img'))
+                     .map(el => el.src.split('/').pop().replace('.svg', '').toLowerCase());
+                 var hasMatch = tagFilters.browser.some(tag => browserImgs.includes(tag));
+                 if (!hasMatch) show = false;
+             }
+             
+             // Check regular tags
+             if (show && tagFilters.tags.length > 0) {
+                 var regTags = Array.from(row.children[2].querySelectorAll('.tag'))
+                     .map(el => el.innerText.toLowerCase());
+                 var hasMatch = tagFilters.tags.some(tag => regTags.includes(tag));
+                 if (!hasMatch) show = false;
+             }
+             
+             // Check attribute tags
+             if (show && tagFilters.attribute.length > 0) {
+                 var attrTags = Array.from(row.children[3].querySelectorAll('.tag'))
+                     .map(el => el.innerText.toLowerCase());
+                 var hasMatch = tagFilters.attribute.some(tag => attrTags.includes(tag));
+                 if (!hasMatch) show = false;
+             }
+             
+             // Check CSP tags
+             if (show && tagFilters.csp.length > 0) {
+                 var cspTags = Array.from(row.children[4].querySelectorAll('.tag'))
+                     .map(el => el.innerText.toLowerCase());
+                 var hasMatch = tagFilters.csp.some(tag => cspTags.includes(tag));
+                 if (!hasMatch) show = false;
+             }
+             
+             // Check timing tags
+             if (show && tagFilters.timing.length > 0) {
+                 var timingTags = Array.from(row.children[5].querySelectorAll('.tag'))
+                     .map(el => el.innerText.toLowerCase());
+                 var hasMatch = tagFilters.timing.some(tag => timingTags.includes(tag));
+                 if (!hasMatch) show = false;
+             }
+
+             // Function filtering
+             if (show && functionPatterns.length > 0) {
+                 var functionElems = Array.from(row.children[1].firstElementChild.children);
+                 functionElems.forEach(item => item.className = '');
+                 
+                 functionPatterns.forEach(pattern => {
+                     if (!pattern) return;
+                     
+                     var hasMatch = false;
+                     functionElems.forEach(item => {
+                         if (item.innerText.toLowerCase().startsWith(pattern)) {
+                             item.className = 'match';
+                             hasMatch = true;
+                         }
+                     });
+                     
+                     if (!hasMatch) show = false;
+                 });
+             }
+         }
+         
+         // Update row visibility
+         if (show) {
+             row.style.display = '';
+             noResults = false;
+         } else {
+             row.style.display = 'none';
+         }
+     });
+
+     // Update the search message visibility
+     var searchMessage = document.getElementById('search-message');
+     searchMessage.style.display = noResults ? 'table-cell' : 'none';
+     
+     // Update the visible results counter
+     var visibleCount = document.querySelectorAll('#gadget-table tbody tr:not([style="display: none;"])').length;
+     document.getElementById('visible-count').textContent = visibleCount;
+ }
+
+ function applyFilter() {
+     // filter on load according to the URL
+     var searchBox = document.getElementById('gadgets-search');
+     var query = decodeURIComponent(location.hash.slice(1));
+     filter(query);
+     if (query) {
+         searchBox.value = query;
+     }
+ }
+
+ function toggleTagFilter(tagType, tagValue) {
+     var searchBox = document.getElementById('gadgets-search');
+     var query = searchBox.value.toLowerCase();
+     var terms = query.split(' ');
+     var tagFilterPrefix = tagType + ':';
+     var tagFilterIndex = -1;
+     
+     // Find if we already have this type of tag filter
+     for (var i = 0; i < terms.length; i++) {
+         if (terms[i].startsWith(tagFilterPrefix)) {
+             tagFilterIndex = i;
+             break;
+         }
+     }
+     
+     if (tagFilterIndex === -1) {
+         // No existing filter of this type, add a new one
+         terms.push(tagFilterPrefix + tagValue);
+     } else {
+         // Parse existing tags for this filter
+         var tagFilter = terms[tagFilterIndex];
+         var tagValues = tagFilter.substring(tagFilterPrefix.length).split(',');
+         
+         // Check if the tag is already in the filter
+         var tagIndex = tagValues.indexOf(tagValue);
+         
+         if (tagIndex === -1) {
+             // Tag not present, add it
+             tagValues.push(tagValue);
+         } else {
+             // Tag present, remove it
+             tagValues.splice(tagIndex, 1);
+         }
+         
+         // Reconstruct the tag filter or remove it if empty
+         if (tagValues.length === 0) {
+             terms.splice(tagFilterIndex, 1);
+         } else {
+             terms[tagFilterIndex] = tagFilterPrefix + tagValues.join(',');
+         }
+     }
+     var searchBox = document.getElementById('gadgets-search');
+     searchBox.value = terms.join(' ').trim();
+     history.replaceState(null, null, encodeURI('#' + searchBox.value));
+     applyFilter();
+     
+     // Highlight the active tags with the accent color
+     updateTagHighlighting();
+ }
+ 
+ function updateTagHighlighting() {
+     var searchBox = document.getElementById('gadgets-search');
+     var query = searchBox.value.toLowerCase();
+     var terms = query.split(' ');
+     var activeTagsByType = {
+         browser: [],
+         tags: [],
+         attribute: [],
+         csp: [],
+         timing: []
+     };
+     
+     // Parse the query to find active tags
+     terms.forEach(function(term) {
+         Object.keys(activeTagsByType).forEach(function(tagType) {
+             var prefix = tagType + ':';
+             if (term.startsWith(prefix)) {
+                 var tagsList = term.substring(prefix.length).split(',');
+                 activeTagsByType[tagType] = activeTagsByType[tagType].concat(tagsList);
+             }
+         });
+     });
+     
+     // Update highlighting for each tag type (both in filters and in table)
+     document.querySelectorAll('.browser-tag, .element-tag, .attribute-tag, .csp-bypass-tag, .timing-tag').forEach(function(tag) {
+         tag.classList.remove('active');
+         
+         // Reset any applied filters for browser images
+         if (tag.classList.contains('browser-tag')) {
+             var img = tag.querySelector('img');
+             if (img) {
+                 img.style.filter = '';
+                 img.style.webkitFilter = '';
+             }
+         }
+     });
+     
+     // Highlight tags that are active in the search
+     Object.keys(activeTagsByType).forEach(function(tagType) {
+         var selector = '';
+         switch(tagType) {
+             case 'browser': selector = '.browser-tag'; break;
+             case 'tags': selector = '.element-tag'; break;
+             case 'attribute': selector = '.attribute-tag'; break;
+             case 'csp': selector = '.csp-bypass-tag'; break;
+             case 'timing': selector = '.timing-tag'; break;
+         }
+         
+         if (selector) {
+             // Update all matching tags across the entire page
+             document.querySelectorAll(selector).forEach(function(tagElem) {
+                 if (tagType === 'browser') {
+                 // For browser tags, check the image src
+                 var img = tagElem.querySelector('img');
+                 if (img && activeTagsByType[tagType].includes(img.src.split('/').pop().replace('.svg', '').toLowerCase())) {
+                     tagElem.classList.add('active');
+                 }
+             } else if (activeTagsByType[tagType].includes(tagElem.innerText.toLowerCase())) {
+                 tagElem.classList.add('active');
+             }
+             });
+         }
+     });
+     
+     // Apply grayscale and opacity to non-selected browser tags when at least one browser filter is active
+     if (activeTagsByType.browser && activeTagsByType.browser.length > 0) {
+         document.querySelectorAll('.browser-tag').forEach(function(tagElem) {
+             var img = tagElem.querySelector('img');
+             if (img && !tagElem.classList.contains('active')) {
+                 img.style.filter = 'grayscale(1) opacity(.4)';
+                 img.style.webkitFilter = 'grayscale(1) opacity(.4)';
+             }
+         });
+     }
+ }
+ 
+ function setup() {
+     var searchBox = document.getElementById('gadgets-search');
+
+     // ensure height during filtering
+     var binTableWrapper = document.getElementById('gadget-table-wrapper');
+     binTableWrapper.style.height = binTableWrapper.clientHeight + 'px';
+
+     // handle user input
+     searchBox.addEventListener('input', function () {
+         var query = searchBox.value;
+         history.replaceState(null, null, encodeURI('#' + query));
+         applyFilter();
+         updateTagHighlighting();
+     });
+
+     // handle shortcuts
+     addEventListener('keydown', function (event) {
+         // focus search box on valid keydown
+         if (event.key.toLowerCase().match(/^[+a-z]$/) &&
+             !(event.ctrlKey || event.altKey || event.metaKey)) {
+             searchBox.focus();
+             searchBox.parentElement.scrollIntoView();
+         }
+         // clear filter on escape
+         else if (event.key === 'Escape') {
+             location.hash = searchBox.value = '';
+             searchBox.focus();
+             searchBox.parentElement.scrollIntoView();
+             updateTagHighlighting();
+         }
+     });
+
+     // handle URL changes
+     window.onhashchange = function() {
+         applyFilter();
+         updateTagHighlighting();
+     };
+
+     // trigger filter on page load
+     applyFilter();
+     updateTagHighlighting();
+ }
+
+ setup();
+</script>
