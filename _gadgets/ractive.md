@@ -13,6 +13,7 @@ gadgets:
       - safari-browser
       - script-tag
       - id-attr
+      - nonce-csp
       - unsafe-eval-csp
       - func-call-parameter
     pocs:

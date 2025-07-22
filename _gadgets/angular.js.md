@@ -12,6 +12,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -44,6 +45,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - before-lib-load
     pocs:
       - description: Starting `1.6.0`, [AngularJS](https://github.com/angular/angular.js) has removed the sandbox that prevents the execution of arbitrary code. Due to this, it can be used to execute arbitrary code even if the `Content Security Policy` (CSP) doesn't allow `unsafe-eval` (see Related Links).
@@ -71,6 +73,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -92,6 +95,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -120,6 +124,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -141,6 +146,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -163,6 +169,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -184,6 +191,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -205,6 +213,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -226,6 +235,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -247,6 +257,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -268,6 +279,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -289,6 +301,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -311,6 +324,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
@@ -332,6 +346,7 @@ gadgets:
       - any-tag
       - custom-attr
       - wh-host-csp
+      - nonce-csp
       - unsafe-eval-csp
       - before-lib-load
     pocs:
