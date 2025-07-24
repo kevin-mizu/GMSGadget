@@ -4,7 +4,7 @@ github: cure53/DOMPurify
 gadgets:
   Latest:
     authors:
-      - twitter:parrot
+      - twitter:parrot409
       - twitter:xssjp
     tags:
       - chrome-browser
