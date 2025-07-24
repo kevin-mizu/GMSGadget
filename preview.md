@@ -52,6 +52,7 @@ title: Preview
   <h3>Content Security Policy</h3>
   <div class="csp-options">
     <label><input type="checkbox" id="csp-self"> 'self'</label>
+    <label><input type="checkbox" id="csp-nonce"> 'nonce'</label>
     <label><input type="checkbox" id="csp-strict-dynamic"> 'strict-dynamic'</label>
     <label><input type="checkbox" id="csp-unsafe-eval"> 'unsafe-eval'</label>
   </div>
@@ -68,12 +69,13 @@ title: Preview
 
         let cspOptions = [];
         if (document.getElementById("csp-self").checked) cspOptions.push("self");
+        if (document.getElementById("csp-nonce").checked) cspOptions.push("nonce");
         if (document.getElementById("csp-strict-dynamic").checked) cspOptions.push("strict-dynamic");
         if (document.getElementById("csp-unsafe-eval").checked) cspOptions.push("unsafe-eval");
 
         let inline_csp = "";
         if (cspOptions.length > 0) {
-            inline_csp = `<meta http-equiv="Content-Security-Policy" content="script-src 'nonce-secret'${cspOptions.map(directive => ` '${directive}'`).join("")}">`;
+            inline_csp = `<meta http-equiv="Content-Security-Policy" content="script-src 'nonce-secret' ${cspOptions.map(directive => directive !== "nonce" ? ` '${directive}'` : "").join(" ")}">`;
         }
 
         previewContainer.innerHTML = "";
@@ -104,6 +106,7 @@ title: Preview
         // set csp options
         const cspValues = csp.split(",");
         if (cspValues.includes("self")) document.getElementById("csp-self").checked = true;
+        if (cspValues.includes("nonce")) document.getElementById("csp-nonce").checked = true;
         if (cspValues.includes("strict-dynamic")) document.getElementById("csp-strict-dynamic").checked = true;
         if (cspValues.includes("unsafe-eval")) document.getElementById("csp-unsafe-eval").checked = true;
 

