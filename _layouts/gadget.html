@@ -146,7 +146,7 @@ layout: common
     function openTry(elem) {
         const code = elem.parentElement.firstElementChild.innerText;
         const csp  = elem.parentElement.parentElement.parentElement.previousElementSibling.innerText;
-        open(`/preview/?html=${encodeURIComponent(code)}&csp=${encodeURIComponent(possibleCSP.filter(c => csp.includes(c)).join(","))}`);
+        location.href = `/preview/?html=${encodeURIComponent(code)}&csp=${encodeURIComponent(possibleCSP.filter(c => csp.includes(c)).join(","))}`;
     }
 
     function initCodeBlocks() {
