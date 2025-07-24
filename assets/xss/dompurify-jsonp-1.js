@@ -1,0 +1,1 @@
+delete document.implementation.__proto__.createHTMLDocument;
