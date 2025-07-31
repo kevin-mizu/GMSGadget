@@ -19,7 +19,7 @@ Your contributions are welcome! Whether it's submitting new gadgets, improving d
 
 <h4 class="no-link">➵ Acknowledgements</h4>
 
-Maybe you? 👀
+[JorianWoltjer](https://github.com/JorianWoltjer), [RenwaX23](https://github.com/RenwaX23), [avlidienbrunn](https://github.com/avlidienbrunn), and maybe you? 👀
 
 *This project uses the <a target="_blank" href="https://gtfobins.github.io/">GTFOBins</a> website template as a base. Big thanks to its creators for the clean and effective design!*
 
