@@ -15,7 +15,7 @@ gadgets:
       - any-timing
     pocs:
       - description: |
-          The SocketIO client-server communication library has multiple modes is transporting data, one of which is "polling". In this mode, a long-lived request is sent that is only resolved when the server has a message to send to the client. These messages use [a custom protocol](https://socket.io/docs/v4/socket-io-protocol/) which happens to be valid JavaScript, allowing it to be used as a script gadget.
+          The [Socket.IO](https://github.com/socketio/socket.io) client-server communication library has multiple modes is transporting data, one of which is "polling". In this mode, a long-lived request is sent that is only resolved when the server has a message to send to the client. These messages use [a custom protocol](https://socket.io/docs/v4/socket-io-protocol/) which happens to be valid JavaScript, allowing it to be used as a script gadget.
 
           *From an attacker's backend*, you need to first set up a new random session and send an invalid namespace request, to which the server will respond through another channel, reflecing your given namespace. You will craft a URL for this other channel containing the SocketIO session ID, which the victim will fetch by sending them to a dynamically generated payload. It will be valid for ~30 seconds.
 
