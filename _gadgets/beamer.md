@@ -24,7 +24,7 @@ gadgets:
                 user_id: "00000000-0000-0000-0000-000000000000"
             };
           </script>
-          <script type="text/javascript" src="[current-location]assets/xss/beamer/beamer-embed.js" defer="defer"></script>
+          <script type="text/javascript" src="[current-location]/assets/xss/beamer/beamer-embed.js" defer="defer"></script>
           <script>
             setTimeout(() => { Beamer.update({language: "FR"}) }, 1000); /*
             window.Beamer&&window.Beamer.update()
@@ -41,7 +41,7 @@ gadgets:
                 user_id: "00000000-0000-0000-0000-000000000000"
             };
           </script>
-          <script type="text/javascript" src="[current-location]assets/xss/beamer/beamer-embed.js" defer="defer"></script>
+          <script type="text/javascript" src="[current-location]/assets/xss/beamer/beamer-embed.js" defer="defer"></script>
           <script>
             setTimeout(() => { Beamer.update({language: "FR"}) }, 1000); /*
             window.Beamer&&window.Beamer.update()
