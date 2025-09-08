@@ -436,4 +436,12 @@
  }
 
  setup();
+ 
+ // for Ctrl+F shortcut to focus search
+ document.addEventListener('keydown', function(event) {
+     if (event.ctrlKey && event.key === 'f') {
+         event.preventDefault();
+         document.getElementById('gadgets-search').focus();
+     }
+ });
 </script>
