@@ -99,6 +99,10 @@ name-attr:
   label: name
   type: attribute
 
+on-attr:
+  label: on*
+  type: attribute
+
 rel-attr:
   label: rel
   type: attribute

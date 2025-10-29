@@ -2,7 +2,31 @@
 description: jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
 github: jquery/jquery
 gadgets:
-  Latest:
+  Latest (1):
+    authors:
+      - dmethvin
+    tags:
+      - chrome-browser
+      - firefox-browser
+      - safari-browser
+      - img-tag
+      - src-attr
+      - on-attr
+      - func-call-parameter
+    pocs:
+      - description: In the past, [jQuery](https://github.com/jquery/jquery) was vulnerable to XSS when an HTML string was passed to the `$("<html-input>")` function as the selector. This was widely abused, especially with `$(location.hash)`, because browsers were URL-decoding `location.hash`. The issue was fixed in 2011 by ensuring that HTML parsing only occurs when the string begins with `<`. Because of this, fully controlling a [jQuery](https://github.com/jquery/jquery) selector allows to execute javascript.
+        code: |
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+          <script >
+            $(document).ready(function(){
+                // user input
+                $("<img src=x onerror=alert(document.domain)>");
+            });
+          </script>
+    links:
+      - https://bugs.jquery.com/ticket/9521/
+      - https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-selector-hash-change-event
+  Latest (2):
     authors:
       - twitter:slekies
       - twitter:kkotowicz
