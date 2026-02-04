@@ -28,7 +28,7 @@ gadgets:
           <!-- user input -->
           <x data-jscolor="{a:alert(document.domain)}">
 
-          <script src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
+          <script nonce="secret" src="https://jscolor.com/release/2.5/jscolor-2.5.2/jscolor.js"></script>
     more-info: |
       **Sink**
 
