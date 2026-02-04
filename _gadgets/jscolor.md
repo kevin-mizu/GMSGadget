@@ -2,7 +2,7 @@
 description: jscolor is a vanilla JavaScript color picker that turns ordinary form controls into customizable widgets.
 github: EastDesire/jscolor
 gadgets:
-  All versions:
+  Latest:
     authors:
       - twitter:ixSly
       - github:ixSly
@@ -14,7 +14,7 @@ gadgets:
       - data-attr
       - unsafe-eval-csp
       - before-lib-load
-    Latest:
+    pocs:
       - description: |
           [jscolor](https://github.com/EastDesire/jscolor) waits for `DOMContentLoaded` before calling `install()`, so it evaluates every `.jscolor` element regardless of whether it appears before or after the library is loaded. With `'unsafe-eval'` enabled in CSP, both payloads in the snippet below run as soon as the picker initializes.
         code: |
