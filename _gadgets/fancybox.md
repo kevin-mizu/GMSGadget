@@ -19,7 +19,7 @@ gadgets:
           <link href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.css" rel="stylesheet" />
           <script src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.js"></script>
           <a data-fancybox="gallery" data-caption="&lt;img src=x onerror=&quot;alert()&quot;&gt;" href="https://example.com/">Click me</a>
-          <a data-fancybox="image" data-options='{"type" : "iframe", "src": "javascript:alert()"}' href="https://example.com/">Click me</a>
+          <a data-fancybox="image" data-options="{&quot;type&quot;: &quot;iframe&quot;, &quot;src&quot;: &quot;javascript:alert()&quot;}" href="https://example.com/">Click me</a>
     links:
       - https://github.com/fancyapps/ui/issues/826
 ---
