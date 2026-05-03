@@ -14,7 +14,7 @@ gadgets:
       - firefox-browser
       - safari-browser
     pocs:
-      - description: The colorbox library uses HTML from title and data-cbox-title attributes and URLs from the data-cbox-href attribute.
+      - description: The colorbox library uses HTML from `title` and `data-cbox-title` attributes and URLs from the `data-cbox-href` attribute.
         code: |
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
           <script src="https://www.jacklmoore.com/colorbox/jquery.colorbox.js"></script>
