@@ -12,7 +12,7 @@ gadgets:
       - firefox-browser
       - safari-browser
     pocs:
-      - description: The `deparam()` is vulnerable to prototype pollution.
+      - description: The `deparam()` function is vulnerable to prototype pollution.
         code: |
           <script src="https://benalman.com/code/projects/jquery-bbq/shared/jquery-1.4.1.js"></script>
           <script src="https://benalman.com/code/projects/jquery-bbq/jquery.ba-bbq.js"></script>
